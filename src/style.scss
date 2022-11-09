@@ -115,12 +115,13 @@
 
 .tirroir {
   position: fixed;
-  top: 5vh;
+  top: 105vh;
   left: 0;
   width: 100%;
   height: 95vh;
   background-color: white;
   z-index: 100;
+  transition: all 0.3s ease-in-out;
 
   .content {
     position: relative;
@@ -151,5 +152,9 @@
         outline: 1px solid transparent;
       }
     }
+  }
+
+  &[data-open='true'] {
+    top: 5vh;
   }
 }

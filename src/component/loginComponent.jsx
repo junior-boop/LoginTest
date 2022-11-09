@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
+import Context_tiroir from '../context/tiroir_context';
 
 export function Login() {
   const [isTrue, setIsTrue] = useState(false);
@@ -7,6 +8,12 @@ export function Login() {
   const [btnText, setBtnText] = useState("d'inscription");
   const ref = useRef();
 
+  //connexion
+  const [email, setEmail] = useState('');
+  const [mdp, setMdp] = useState('');
+
+  //use the local tiroir context
+  const { etat, dispatch } = useContext(Context_tiroir);
   // 367, 587
 
   const Height = () => {
@@ -41,6 +48,10 @@ export function Login() {
     }
   };
 
+  useEffect(() => {
+    console.log(ref.current.value);
+  });
+
   return (
     <div>
       <div className="haut">
@@ -54,16 +65,24 @@ export function Login() {
           <div className="content">
             <h2>Connexion</h2>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam,
-              dignissimos?
+              Lorem ipsum dolor sit amet, consectetur adipisicing
+              elit. Ullam, dignissimos?
             </p>
             <div className="champs">
-              <label htmlFor="">Utilisateurs</label>
-              <input className="name" type="text" />
+              <label htmlFor="">E-mail Utilisateurs</label>
+              <input
+                className="name"
+                type="mail"
+                onChange={({ target }) => setEmail(target.value)}
+              />
             </div>
             <div className="champs">
               <label htmlFor="">Mots de passe</label>
-              <input className="name" type="text" />
+              <input
+                className="name"
+                type="password"
+                onChange={({ target }) => setMdp(target.value)}
+              />
             </div>
             <div className="champs">
               <button>Connecter</button>
@@ -77,7 +96,7 @@ export function Login() {
             </p>
             <div className="champs">
               <label htmlFor="">Nom</label>
-              <input className="name" type="text" />
+              <input ref={ref} className="name" type="text" />
             </div>
             <div className="champs">
               <label htmlFor="">Prenom</label>
@@ -99,7 +118,7 @@ export function Login() {
       </div>
       <div className="bas">
         <div className="tool">
-          <div className="setting">
+          <div className="setting" onClick={() => dispatch({ type: 'OPEN' })}>
             <MingcuteSettings1Fill width={1.6} height={1.6} />
           </div>
           <div className="SignUp" onClick={Clickable}>
