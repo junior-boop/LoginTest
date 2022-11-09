@@ -1,5 +1,12 @@
-import React, { useState, useEffect, useRef, useContext } from 'react';
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useContext,
+  useReducer,
+} from 'react';
 import Context_tiroir from '../context/tiroir_context';
+import connexion from '../reduce/connexion_reducer';
 
 export function Login() {
   const [isTrue, setIsTrue] = useState(false);
@@ -15,6 +22,9 @@ export function Login() {
   //use the local tiroir context
   const { etat, dispatch } = useContext(Context_tiroir);
   // 367, 587
+
+  // reduce Connexion
+  const [etat2, dispatch2] = useReducer(connexion, true);
 
   const Height = () => {
     if (isTrue) {
@@ -65,8 +75,8 @@ export function Login() {
           <div className="content">
             <h2>Connexion</h2>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing
-              elit. Ullam, dignissimos?
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam,
+              dignissimos?
             </p>
             <div className="champs">
               <label htmlFor="">E-mail Utilisateurs</label>
@@ -85,7 +95,16 @@ export function Login() {
               />
             </div>
             <div className="champs">
-              <button>Connecter</button>
+              <button
+                onClick={() =>
+                  dispatch2({
+                    type: 'CONNEXION',
+                    payload: { email: email, password: mdp }
+                  })
+                }
+              >
+                Connecter
+              </button>
             </div>
           </div>
           <div className="content">

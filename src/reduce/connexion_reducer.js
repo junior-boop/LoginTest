@@ -1,44 +1,52 @@
-function IdGenerator(){
-  let letter = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_"
-  let id = ''
-  for(let i = 0; i < 8; i++){
-    const random = Math.round(Math.random * 100 * 0.63)
-    id += letter[random]
+function IdGenerator() {
+  let letter =
+    'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_';
+  let id = '';
+  for (let i = 0; i < 8; i++) {
+    const random = Math.round(Math.random * 100 * 0.63);
+    id += letter[random];
   }
 
-  return id
+  return id;
 }
-function TokenGenerator(){
-  let letter = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_"
-  let token = ''
-  for(let i = 0; i < 62; i++){
-    const random = Math.round(Math.random * 100 * 0.63)
-    token += letter[random]
+function TokenGenerator() {
+  let letter =
+    'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890_';
+  let token = '';
+  for (let i = 0; i < 62; i++) {
+    const random = Math.round(Math.random * 100 * 0.63);
+    token += letter[random];
   }
-  return token
+  return token;
 }
 
-export default function connexion(etat, action){
-  switch (action.type){
-    case "CONNEXION":
+export default function connexion(etat, action) {
+  switch (action.type) {
+    case 'CONNEXION':
+      const object1 = {
+        email: action.payload.email,
+        password: action.payload.password,
+      };
+
+      console.log(object1);
+      return 'CONNEXION';
+
+    case 'INSCRIPTION':
       const object = {
-        email : action.payload.email,
-        password : action.payload.password
-      }
+        nom: action.payload.nom,
+        prenom: action.payload.prenom,
+        email: action.payload.email,
+        password: action.payload.password,
+        id: IdGenerator(),
+        token: TokenGenerator(),
+      };
 
-      return "CONNEXION"
-    case "INSCRIPTION":
-      const object = {
-        nom : action.payload.nom,
-        prenom : action.payload.prenom,
-        email : action.payload.email,
-        password : action.payload.password,
-        id : IdGenerator(),
-        token : TokenGenerator()
-      }
+      console.log(object);
+      return 'INSCRIPTION';
 
-      console.log(object)
-
-      return "INSCRIPTION"
+    case 'DECONNECTION':
+      return 'DECONNECTION';
+    default:
+      throw new Error('Type non pris en charge');
   }
 }
