@@ -99,7 +99,7 @@ export function Login() {
                 onClick={() =>
                   dispatch2({
                     type: 'CONNEXION',
-                    payload: { email: email, password: mdp }
+                    payload: { email: email, password: mdp } 
                   })
                 }
               >
