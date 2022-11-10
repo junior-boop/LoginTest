@@ -1,16 +1,22 @@
-import React, {useState, useContext} from 'react';
+import React, {useState, useContext, useRef, useEffect} from 'react';
 import Global_context from '../context/global_context'
 
 export default function Connexion(){
-
+  const ref = useRef()
   //connexion
   const [email, setEmail] = useState('');
   const [mdp, setMdp] = useState('');
 
   const {Global_State_login, Global_Dispatch} = useContext(Global_context)
 
+  useEffect(() => {
+    console.log(ref)
+  }, [ref])
+
+  console.log(ref)
+
   return(
-    <div className="content">
+    <div ref = {ref} className="content">
         <h2>Connexion</h2>
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam,
