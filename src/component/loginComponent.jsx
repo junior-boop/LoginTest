@@ -1,30 +1,27 @@
-import React, {
-  useState,
-  useEffect,
-  useRef,
-  useContext,
-  useReducer,
-} from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+
 import Context_tiroir from '../context/tiroir_context';
-import connexion from '../reduce/connexion_reducer';
+import Global_context from '../context/global_context';
+
+import Inscription from './Inscription';
+import Connexion from './connexion';
 
 export function Login() {
   const [isTrue, setIsTrue] = useState(false);
   const [leftArrow, setLeftArrow] = useState(0);
   const [rightArrow, setRightArrow] = useState(1.6);
   const [btnText, setBtnText] = useState("d'inscription");
-  const ref = useRef();
-
-  //connexion
-  const [email, setEmail] = useState('');
-  const [mdp, setMdp] = useState('');
+  const [loginStat, setLoginState] = useState('DECONNECTER');
 
   //use the local tiroir context
   const { etat, dispatch } = useContext(Context_tiroir);
-  // 367, 587
 
-  // reduce Connexion
-  const [etat2, dispatch2] = useReducer(connexion, true);
+  //use the Global Context login
+  const { Global_State_login, Global_Dispatch } = useContext(Global_context);
+
+  useEffect(() => {
+    setLoginState(Global_State_login);
+  }, [Global_State_login]);
 
   const Height = () => {
     if (isTrue) {
@@ -44,6 +41,7 @@ export function Login() {
   const Clickable = () => {
     setIsTrue(!isTrue);
     Switch();
+    LoginState();
   };
 
   const Switch = () => {
@@ -58,9 +56,14 @@ export function Login() {
     }
   };
 
-  useEffect(() => {
-    console.log(ref.current.value);
-  });
+  const LoginState = () => {
+    switch (loginStat) {
+      case 'CONNEXION':
+        setIsTrue(true);
+      case 'INSCRIPTION':
+        setIsTrue(false);
+    }
+  };
 
   return (
     <div>
@@ -72,67 +75,8 @@ export function Login() {
             transform: `translate(${TranslateX()}px)`,
           }}
         >
-          <div className="content">
-            <h2>Connexion</h2>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam,
-              dignissimos?
-            </p>
-            <div className="champs">
-              <label htmlFor="">E-mail Utilisateurs</label>
-              <input
-                className="name"
-                type="mail"
-                onChange={({ target }) => setEmail(target.value)}
-              />
-            </div>
-            <div className="champs">
-              <label htmlFor="">Mots de passe</label>
-              <input
-                className="name"
-                type="password"
-                onChange={({ target }) => setMdp(target.value)}
-              />
-            </div>
-            <div className="champs">
-              <button
-                onClick={() =>
-                  dispatch2({
-                    type: 'CONNEXION',
-                    payload: { email: email, password: mdp } 
-                  })
-                }
-              >
-                Connecter
-              </button>
-            </div>
-          </div>
-          <div className="content">
-            <h2>Inscription</h2>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ullam,
-              dignissimos?
-            </p>
-            <div className="champs">
-              <label htmlFor="">Nom</label>
-              <input ref={ref} className="name" type="text" />
-            </div>
-            <div className="champs">
-              <label htmlFor="">Prenom</label>
-              <input className="name" type="text" />
-            </div>
-            <div className="champs">
-              <label htmlFor="">E-mail</label>
-              <input className="name" type="mail" />
-            </div>
-            <div className="champs">
-              <label htmlFor="">Mots de passe</label>
-              <input className="name" type="password" />
-            </div>
-            <div className="champs">
-              <button>Inscription</button>
-            </div>
-          </div>
+          <Connexion />
+          <Inscription />
         </div>
       </div>
       <div className="bas">
