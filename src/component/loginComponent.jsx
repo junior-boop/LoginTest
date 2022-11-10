@@ -63,7 +63,7 @@ export function Login() {
       case 'INSCRIPTION':
         setIsTrue(false);
     }
-  };
+  }; 
 
   return (
     <div>
