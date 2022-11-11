@@ -1,8 +1,8 @@
 export default function Reduce(etat, action){
-  if(action.type === "Bonjour"){
-    return "Bonjour"
+  if(action.type === "CONNEXION"){
+    return "CONNEXION"
   }
-  if (action.type === "Bonsoir"){
-    return "Bonsoir"
+  if (action.type === "DECONNEXION"){
+    return "DECONNEXION"
   }
 }
