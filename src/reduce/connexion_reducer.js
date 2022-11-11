@@ -28,7 +28,7 @@ export default function connexion(etat, action) {
         password: action.payload.password,
       };
 
-      console.log(object1);
+      console.log(window, object1);
       return 'CONNEXION';
 
     case 'INSCRIPTION':

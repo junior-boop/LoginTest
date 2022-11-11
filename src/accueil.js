@@ -6,6 +6,10 @@ export default function Accueil(){
   const value = useContext(Global_context)
   console.log(value)
   return(
-    <div>Bonjour</div>
+      <div>
+        <div className="container">
+          
+        </div>
+      </div>
   )
 }

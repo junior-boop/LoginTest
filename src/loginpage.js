@@ -1,6 +1,6 @@
 import React, { useReducer, useContext } from 'react';
 import { Login } from './component/loginComponent';
-import './style.scss';
+
 
 //reducer
 import tiroir_reducer from './reduce/tiroir_reducer'
