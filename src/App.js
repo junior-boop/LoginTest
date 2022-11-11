@@ -13,13 +13,13 @@ export default function App() {
     'DECONNECTER'
   );
 
-  const [etat, dispatch] = useReducer(Reduce, '');
+  const [etat, dispatch] = useReducer(Reduce, 'DECONNEXION');
 
-  const [appState, setAppState] = useState(Global_State_login);
+  const [appState, setAppState] = useState(etat);
 
   useEffect(() => {
-    setAppState(Global_State_login);
-  }, [Global_State_login]);
+    setAppState(etat);
+  }, [etat]);
 
   const Navigation = () => {
     if (appState === 'DECONNECTER') {
@@ -35,16 +35,18 @@ export default function App() {
     }
   };
 
+  console.log(etat);
+
   return (
     <div>
       <Global_context.Provider
         value={{
-          Global_State_login,
-          Global_Dispatch,
+          etat,
+          dispatch,
         }}
       >
         {Navigation()}
-        {/* <Accueil /> */}
+        {/* <LoginPage /> */}
       </Global_context.Provider>
     </div>
   );
